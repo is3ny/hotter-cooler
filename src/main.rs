@@ -1,7 +1,5 @@
-use std::io;
-use std::io::Write;
+use std::{io::{self, Write}, cmp::Ordering};
 use rand::Rng;
-use std::cmp::Ordering;
 
 const MAX_SECRET: i32 = 100;
 const MIN_SECRET: i32 = 0;
