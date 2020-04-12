@@ -3,10 +3,13 @@ use std::io::Write;
 use rand::Rng;
 use std::cmp::Ordering;
 
+const MAX_SECRET: i32 = 100;
+const MIN_SECRET: i32 = 0;
+
 fn main() {
     println!("Guess the number.");
 
-    let secret_number = rand::thread_rng().gen_range(0, 101);
+    let secret_number = rand::thread_rng().gen_range(MIN_SECRET, MAX_SECRET);
 
     let mut old_dist = 0;
     let mut first_guess = true;
