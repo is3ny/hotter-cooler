@@ -1,13 +1,48 @@
-use std::{io::{self, Write}, cmp::Ordering};
+use std::{env, io::{self, Write}, cmp::Ordering};
 use rand::Rng;
 
-const MAX_SECRET: i32 = 100;
-const MIN_SECRET: i32 = 0;
+const DEFAULT_MAX_SECRET: i32 = 100; 
+const DEFAULT_MIN_SECRET: i32 = 0;
+
+fn get_secret_bounds(args: &Vec<String>) -> (i32, i32) {
+    let mut secret_min = DEFAULT_MIN_SECRET;
+    let mut secret_max = DEFAULT_MAX_SECRET;
+
+    if args.len() == 3 {
+        secret_min = match args[1].parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Could not parse <min>. Defaulting to {}.", secret_min);
+                secret_min
+            },
+        };
+
+        secret_max = match args[2].parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Could not parse <max>. Defaulting to {}.", secret_max);
+                secret_max
+            },
+        };
+    }
+    
+    (secret_min, secret_max)
+}
 
 fn main() {
     println!("Guess the number.");
 
-    let secret_number = rand::thread_rng().gen_range(MIN_SECRET, MAX_SECRET);
+    let args: Vec<String> = env::args().collect();
+    if args.len() == 2 || args.len() > 3 {
+        println!("Usage:\n\thc\t-- run with default bounds [{}..{}]\n\thc <min> <max>\n",
+                 DEFAULT_MIN_SECRET, DEFAULT_MAX_SECRET);
+        return;
+    }
+
+    let (secret_min, secret_max) = get_secret_bounds(&args);
+    let secret_number = rand::thread_rng().gen_range(secret_min, secret_max);
+    
+    println!("The number is in range [{}..{}].", secret_min, secret_max);
 
     let mut old_dist = 0;
     let mut first_guess = true;
