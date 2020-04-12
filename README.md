@@ -28,7 +28,7 @@ You win!
 
 Make sure you have rust compiler and cargo installed on your machine. Then in the project root run
 ```
-$ cargo run
+$ cargo run --release
 ```
 
 ### Why
