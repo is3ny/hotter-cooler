@@ -31,6 +31,12 @@ Make sure you have rust compiler and cargo installed on your machine. Then in th
 $ cargo run --release
 ```
 
+You can try to set different bounds for the secret number by passing two additional command line arguments to the game like
+```
+$ cargo run 100 1000    # The secret number will be between 100 and 1000
+```
+
+
 ### Why
 
 It is written as a rust exercise.
