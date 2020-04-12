@@ -8,8 +8,6 @@ fn main() {
 
     let secret_number = rand::thread_rng().gen_range(0, 101);
 
-    println!("Secret number is {}", secret_number);
-
     let mut old_dist = 0;
     let mut first_guess = true;
     let mut moves_taken = 0;
